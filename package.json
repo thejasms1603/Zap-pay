@@ -1,5 +1,5 @@
 {
-  "name": "my-turborepo",
+  "name": "zappay",
   "private": true,
   "scripts": {
     "build": "turbo build",
