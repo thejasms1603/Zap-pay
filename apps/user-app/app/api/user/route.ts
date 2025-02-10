@@ -1,24 +1,19 @@
-import { PrismaClient } from "@prisma/client";
+import { getServerSession } from "next-auth"
+import { authOptions } from "../../../lib/Auth"
 import { NextResponse } from "next/server";
-const client = new PrismaClient();
 
-export const GET = async () => {
-  try {
-    await client.user.create({
-      data: {
-        email: "hdhdhd",
-        password: "shaha",
-      },
-    });
 
-    return NextResponse.json({ message: "Account Created" });
-  } catch (error) {
-    console.error(error);
-    return NextResponse.json(
-      { message: "Error creating account" },
-      { status: 500 }
-    );
-  } finally {
-    await client.$disconnect();
+export const GET = async () =>{
+  const session = await getServerSession(authOptions);
+  if(session.user)
+  {
+    return NextResponse.json({
+      user: session.user
+    })
   }
-};
+  return NextResponse.json({
+    message: "You are not logged in"
+  }, {
+    status:403
+  })
+}
