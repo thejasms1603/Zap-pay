@@ -20,12 +20,12 @@ export const authOptions = {
           placeholder: "Enter your password",
           required: true,
         },
-        email:{
-          label:"email",
-          type:"text",
-          placeholder:"Enter your email",
-          required:false
-        }
+        // email:{
+        //   label:"email",
+        //   type:"text",
+        //   placeholder:"Enter your email",
+        //   required:false
+        // }
       },
       async authorize(credentials: any) {
         const hashedPasswords = await bcrypt.hash(credentials.password, 10);
