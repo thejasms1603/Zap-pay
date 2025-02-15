@@ -2,8 +2,10 @@ import express from "express";
 import db from "@repo/db/client";
 const app = express();
 
+app.use(express.json());
+
 app.post("/hdfcwebhook", async (req, res) => {
-  const paymentInfo = {
+  const paymentInfo : {token: string, userId: string, amount: string} = {
     // TODO : Add zod validation
     // check if this request actually came from hdfc bank, use a webhook secret here
     token: req.body.token,
@@ -19,7 +21,7 @@ app.post("/hdfcwebhook", async (req, res) => {
         },
         data: {
           amount: {
-            increment: paymentInfo.amount,
+            increment: Number(paymentInfo.amount)
           },
         },
       }),
@@ -45,3 +47,4 @@ app.post("/hdfcwebhook", async (req, res) => {
 
 //balance
 // on ramp transaction
+app.listen(3003);
