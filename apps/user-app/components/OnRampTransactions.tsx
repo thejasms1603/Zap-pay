@@ -24,9 +24,12 @@ const OnRampTransactions = ({
           <div key={index} className='flex justify-between'>
             <div>
               <div className='text-sm'>Received INR</div>
-              <div>{t.time.toDateString()}</div>
+              <div>
+                {" "}
+                {t.time ? t.time.toDateString() : "Invalid Date"}
+              </div>
             </div>
-            <div className='flex flex-col justify-center'>
+            <div className='flex flex-col justify-center text-green-600'>
               + Rs {t.amount / 100}
             </div>
           </div>
