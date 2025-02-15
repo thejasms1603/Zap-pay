@@ -10,11 +10,11 @@ datasource db {
 
 model User {
   id Int @id @default(autoincrement())
-  email String @unique
+  email String? @unique
   number String @unique
   password String
   name String?
-  onRampTransaction onRampTransaction[]
+  onRampTransactions onRampTransaction[]
   Balance Balance[]
 }
 
@@ -38,17 +38,19 @@ model onRampTransaction{
   token String @unique
   provider String
   amount Int
-  startime DateTime
+  startTime DateTime
   userId Int
   user User @relation(fields: [userId], references: [id])
 }
 
 
-enum onRampStatus{
+enum onRampStatus {
   Success
-  Failed
+  Failure
   Processing
 }
+
+
 model Balance {
   id Int @id @default(autoincrement())
   userId Int @unique
